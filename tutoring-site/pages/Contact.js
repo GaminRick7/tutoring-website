@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer'
 import Image from 'next/image';
 import styles from '../styles/Contact.module.scss'
 import { Container, Grid, Button, Stack, Card, Icon, SvgIcon } from '@mui/material';
@@ -31,6 +32,7 @@ export default function Contact() {
         <title>{contactText}</title>
         <meta name="description" content="Students to Students Tutoring Website - Contact" />
         <link rel="icon" href="/favicon.ico" />
+        <script src="https://cdn.tailwindcss.com"></script>
       </Head>
 
       {/* Navbar */}
@@ -58,7 +60,7 @@ export default function Contact() {
           
         </Grid>
       </Grid>
-
+      <Footer></Footer>
     </div>
   )
 }

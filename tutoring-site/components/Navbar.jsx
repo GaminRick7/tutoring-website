@@ -31,10 +31,20 @@ function Navbar(props) {
   const lang = useLanguageContext().language; // True means English and False means Chinese
   const changeLang = useLanguageContext().setLanguage;
 
-  let navItems = navItemsEnglish;
+  let navHome = 'Home'
+  let navCourses = 'Courses'
+  let navEvents = 'Events'
+  let navCalendar= 'Calendar'
+  let navContact = 'Contact'
+  let navTeam = 'Team'
 
   if(!lang) {
-    navItems = navItemsChinese;
+    navHome = '主页'
+    navCourses = '课程'
+    navEvents = '事件'
+    navCalendar= '日历'
+    navContact = '联系'
+    navTeam = '团队'
   }
 
   const handleDrawerToggle = () => {
@@ -49,106 +59,77 @@ function Navbar(props) {
     }
   } 
 
-  // Mobile Navbar Drawer
-  const drawer = (
-    <Box>
-      <Image src="/images/mobileNavBubblesLeft.svg" layout="raw" width={100} height={100} className={styles.mobileNavBubblesLeft}></Image>
-      <Image src="/images/mobileNavBubblesRight.svg" layout="raw" width={100} height={100} className={styles.mobileNavBubblesRight}></Image>
-      
-      <Grid container direction="row-reverse">
-        <Grid container item xs="auto" alignItems="center">
-          <IconButton aria-label="delete" sx={{paddingX: '1.5rem'}} onClick={handleDrawerToggle}>
-            <CloseRoundedIcon sx={{color: 'white'}}/>
-          </IconButton>
-        </Grid>
-        <Grid item xs>
-        <Typography variant="h6" className={styles.logo} sx={{ my: 2, mx: '2rem'}}>
-          {lang ? 'Students to Students Tutoring' : '学生学习辅导'}
-        </Typography>
-        </Grid>
-      </Grid>
-      {/* <Divider /> */}
-      <List sx={{position: 'absolute', top: '50%;', transform: 'translateY(-50%)', width: '100vw'}}>
-        {navItems.map((item, index) => (
-          <Link key={item} href={`${navLink[index]}`} >
-            <ListItem disablePadding sx={{paddingTop: '1rem', paddingBottom: '1rem'}} onClick={handleDrawerToggle}>
-              <ListItemButton sx={{display: 'flex', justifyContent: 'center'}}>
-                  <a className={styles.navTitleMobile}>
-                    {item}
-                  </a>
-              </ListItemButton>
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-    </Box>
-  );
-
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex', position: 'absolute'}}>
-
-      {/* Desktop Navbar */}
-      <AppBar component="nav" className={styles.navbar}>
-        <Toolbar sx={{paddingLeft: 'none'}}>
-          {/* Hamburger Menu */}
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, flexGrow: 1, display: { sm: 'none' }, justifyContent:'flex-start'}}
-            className={styles.navTitleDesktop}
-          >
-            <MenuIcon />
-          </IconButton>
-          {/* Logo */}
-          <Box sx={{ flexGrow: 1, margin: 0, display: { xs: 'none', sm: 'block' }}}>
-            <Image src={'/images/logo.svg'} layout="raw" width={100} height={50} className={`${styles.logo} ${styles.logoImage}`}/>
-          </Box>
-          
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map((item, index) => (
-              <Link key={item} href={`${navLink[index]}`}>
-                <Button className={styles.navTitleDesktop}>
-                    <a>
-                      {item}
-                    </a>
-                </Button>
-              </Link>
-            ))}
-          </Box>
+    <div class="bg-white">
+    <header class="bg-white shadow-lg fixed top-0 w-full z-50">
+    <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+      <div class="flex lg:flex-1">
+        <a href="#" class="-m-1.5 p-1.5">
+          <span class="sr-only">Your Company</span>
+          <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt=""></img>
+        </a>
+      </div>
+      <div class="flex lg:hidden">
+        <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+          <span class="sr-only">Open main menu</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </button>
+      </div>
+      <div class="hidden lg:flex lg:gap-x-12">
+        <a href="/" class="text-sm font-semibold leading-6 text-gray-900">{navHome}</a>
+        <a href="/Team" class="text-sm font-semibold leading-6 text-gray-900">{navTeam}</a>
+        <a href="/Courses" class="text-sm font-semibold leading-6 text-gray-900">{navCourses}</a>
+        <a href="/Events" class="text-sm font-semibold leading-6 text-gray-900">{navEvents}</a>
+        <a href="/Calendar" class="text-sm font-semibold leading-6 text-gray-900">{navCalendar}</a>
+        <a href="/Contact" class="text-sm font-semibold leading-6 text-gray-900">{navContact}</a>
+      </div>
+      <div class="hidden lg:flex lg:flex-1 lg:justify-end">
           <Box onClick={changeLanguage} className={styles.toggle}>
             <Grid container className={styles.languageToggle}>
               <Grid item xs={6} className={styles.china} sx={lang ? {opacity: 0.5} : {opacity: 1}}></Grid>
               <Grid item xs={6} className={styles.canada} sx={!lang ? {opacity: 0.5} : {opacity: 1}}></Grid>
             </Grid>
           </Box>
-        </Toolbar>
-      </AppBar>
-      {/* Mobile Navbar */}
-      <Box component="nav">
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: 'block', sm: 'none' }, 
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: '100%', backgroundColor: '#11999E'},
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </Box>
-      <Box component="main" sx={{ p: 3 }}>
-        <Toolbar />    
-      </Box>
-    </Box>
+      </div>
+    </nav>
+    <div class="lg:hidden" role="dialog" aria-modal="true">
+      <div class="fixed inset-0 z-50"></div>
+      <div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <div class="flex items-center justify-between">
+          <a href="#" class="-m-1.5 p-1.5">
+            <span class="sr-only">Your Company</span>
+            <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt=""></img>
+          </a>
+          <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+            <span class="sr-only">Close menu</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="mt-6 flow-root">
+          <div class="-my-6 divide-y divide-gray-500/10">
+            <div class="space-y-2 py-6">
+              <a href="/" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">{navHome}</a>
+              <a href="/Team" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">{navTeam}</a>
+              <a href="/Courses" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">{navCourses}</a>
+              <a href="/Events" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">{navEvents}</a>
+              <a href="/Calendar" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">{navCalendar}</a>
+              <a href="/Contact" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">{navContact}</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  </div>
+
+
   );
 }
 

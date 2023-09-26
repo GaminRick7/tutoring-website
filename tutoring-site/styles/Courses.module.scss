@@ -3,7 +3,7 @@
 
 // For top half section
 .topSection {
-  background-color: $lightest;
+  background-color: white;
   width: 100%;
   padding-top: 10vh;
   height: 32vh;
@@ -79,7 +79,7 @@
   //height: 100%;
   height: 100%;
   min-height: 60vh;
-  background: linear-gradient(244.63deg, #30E3CA -7.2%, rgba(48, 227, 202, 0) 67.45%), #11999E;
+  background-color: white;
   overflow: hidden;
   position: fixed;
   justify-content: center;
@@ -132,7 +132,7 @@
     align-items: center;
     width: 102px;
     height: 80px;
-    background-color: $lightest;
+    background-color: white;
     margin-left: 1rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
